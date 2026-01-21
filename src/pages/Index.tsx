@@ -9,6 +9,7 @@ import { EmergencySection } from "@/components/EmergencySection";
 import { ClosingSection } from "@/components/ClosingSection";
 import { Footer } from "@/components/Footer";
 import { SafetyChatbot } from "@/components/SafetyChatbot";
+import { SOSButton } from "@/components/SOSButton";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
       <ClosingSection />
       <Footer />
       <SafetyChatbot />
+      <SOSButton />
     </div>
   );
 };
