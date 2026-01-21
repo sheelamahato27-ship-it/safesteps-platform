@@ -47,6 +47,81 @@ export type Database = {
         }
         Relationships: []
       }
+      safety_preferences: {
+        Row: {
+          auto_sos_enabled: boolean | null
+          created_at: string
+          crowd_alerts_enabled: boolean | null
+          id: string
+          night_mode_enabled: boolean | null
+          preferred_route_type: string | null
+          share_location_with_contacts: boolean | null
+          sos_delay_seconds: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          auto_sos_enabled?: boolean | null
+          created_at?: string
+          crowd_alerts_enabled?: boolean | null
+          id?: string
+          night_mode_enabled?: boolean | null
+          preferred_route_type?: string | null
+          share_location_with_contacts?: boolean | null
+          sos_delay_seconds?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          auto_sos_enabled?: boolean | null
+          created_at?: string
+          crowd_alerts_enabled?: boolean | null
+          id?: string
+          night_mode_enabled?: boolean | null
+          preferred_route_type?: string | null
+          share_location_with_contacts?: boolean | null
+          sos_delay_seconds?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      trusted_drivers: {
+        Row: {
+          created_at: string
+          driver_name: string
+          driver_phone: string
+          id: string
+          notes: string | null
+          updated_at: string
+          user_id: string
+          vehicle_number: string | null
+          vehicle_type: string | null
+        }
+        Insert: {
+          created_at?: string
+          driver_name: string
+          driver_phone: string
+          id?: string
+          notes?: string | null
+          updated_at?: string
+          user_id: string
+          vehicle_number?: string | null
+          vehicle_type?: string | null
+        }
+        Update: {
+          created_at?: string
+          driver_name?: string
+          driver_phone?: string
+          id?: string
+          notes?: string | null
+          updated_at?: string
+          user_id?: string
+          vehicle_number?: string | null
+          vehicle_type?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -145,6 +145,12 @@ export const Navbar = () => {
                     <div className="text-sm text-muted-foreground px-2 py-1">
                       Signed in as {user.email}
                     </div>
+                    <Link to="/profile" onClick={() => setIsOpen(false)}>
+                      <Button variant="ghost" size="sm" className="w-full justify-start">
+                        <User className="w-4 h-4 mr-2" />
+                        Profile
+                      </Button>
+                    </Link>
                     <Button variant="ghost" size="sm" className="justify-start" onClick={signOut}>
                       <LogOut className="w-4 h-4 mr-2" />
                       Log out
