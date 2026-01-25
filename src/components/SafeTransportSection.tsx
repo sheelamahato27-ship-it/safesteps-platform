@@ -160,20 +160,6 @@ export const SafeTransportSection = () => {
               </div>
             </div>
           </div>
-
-          {/* Cost-effective note */}
-          <div className="mt-12 glass-card p-6 flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-safe/10">
-              <Code className="w-6 h-6 text-safe" />
-            </div>
-            <div>
-              <h4 className="font-semibold text-foreground mb-1">Software-Based & Cost-Effective</h4>
-              <p className="text-muted-foreground">
-                Our entire safety system is software-based — no expensive hardware required. 
-                This makes it accessible and affordable for everyone.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Shield, Menu, X, Globe, ChevronDown, LogOut, User } from "lucide-react";
+import { Shield, Menu, X, LogOut, User } from "lucide-react";
 import { Button } from "./ui/button";
 import { useAuth } from "@/hooks/useAuth";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageSelector } from "./LanguageSelector";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,19 +12,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Features", href: "/features" },
-  { label: "How It Works", href: "/how-it-works" },
-  { label: "Emergency", href: "/emergency" },
-  { label: "Resources", href: "/resources" },
-];
+import { ChevronDown } from "lucide-react";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { user, signOut, isLoading } = useAuth();
+  const { t } = useLanguage();
+
+  const navItems = [
+    { label: t('nav.home'), href: "/" },
+    { label: t('nav.features'), href: "/features" },
+    { label: t('nav.howItWorks'), href: "/how-it-works" },
+    { label: t('nav.emergency'), href: "/emergency" },
+    { label: t('nav.resources'), href: "/resources" },
+  ];
 
   const isActive = (href: string) => {
     if (href === "/") return location.pathname === "/";
@@ -63,11 +67,7 @@ export const Navbar = () => {
 
           {/* Right side */}
           <div className="hidden lg:flex items-center gap-4">
-            <button className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              <Globe className="w-4 h-4" />
-              <span>EN</span>
-              <ChevronDown className="w-3 h-3" />
-            </button>
+            <LanguageSelector variant="compact" />
 
             {isLoading ? (
               <div className="w-20 h-8 bg-white/10 animate-pulse rounded" />

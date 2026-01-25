@@ -1,7 +1,28 @@
 import { Shield, Radio, MapPin, Bell } from "lucide-react";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
+import { useSafety } from "@/contexts/SafetyContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/hooks/useAuth";
 
 export const HeroSection = () => {
+  const navigate = useNavigate();
+  const { activateSafety, isSafetyActive } = useSafety();
+  const { t } = useLanguage();
+  const { user } = useAuth();
+
+  const handleActivateSafety = () => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    activateSafety();
+  };
+
+  const handleLearnMore = () => {
+    navigate("/features");
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Glow */}
@@ -40,35 +61,40 @@ export const HeroSection = () => {
 
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground leading-tight mb-6 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-            AI-Powered Safety
+            {t('hero.title').split(' ').slice(0, 2).join(' ')}
             <br />
-            <span className="text-gradient">for Women</span>
+            <span className="text-gradient">{t('hero.title').split(' ').slice(2).join(' ')}</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed animate-fade-up" style={{ animationDelay: "0.4s" }}>
-            Real-time alerts, smart location tracking, and instant emergency response—so every woman feels safe, anytime, anywhere.
+            {t('hero.subtitle')}
           </p>
 
           {/* Live Status Badge */}
           <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass mb-10 animate-fade-up" style={{ animationDelay: "0.5s" }}>
             <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-safe opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-safe"></span>
+              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isSafetyActive ? 'bg-safe' : 'bg-caution'} opacity-75`}></span>
+              <span className={`relative inline-flex rounded-full h-3 w-3 ${isSafetyActive ? 'bg-safe' : 'bg-caution'}`}></span>
             </span>
             <span className="text-sm font-medium text-foreground">
-              LIVE • 24/7 Monitoring Enabled
+              {isSafetyActive ? t('hero.liveMonitoring') : "Safety Mode: OFF"}
             </span>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style={{ animationDelay: "0.6s" }}>
-            <Button variant="glow" size="xl" className="w-full sm:w-auto">
+            <Button 
+              variant={isSafetyActive ? "default" : "glow"} 
+              size="xl" 
+              className="w-full sm:w-auto"
+              onClick={handleActivateSafety}
+            >
               <Radio className="w-5 h-5" />
-              Activate Safety
+              {isSafetyActive ? "Safety Active ✓" : t('hero.activateSafety')}
             </Button>
-            <Button variant="glass" size="xl" className="w-full sm:w-auto">
-              Learn More
+            <Button variant="glass" size="xl" className="w-full sm:w-auto" onClick={handleLearnMore}>
+              {t('hero.learnMore')}
             </Button>
           </div>
 
